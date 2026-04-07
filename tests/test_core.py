@@ -188,3 +188,38 @@ class TestValidation:
         """Returns False when fewer values are provided than required."""
         values = [1.0]
         assert check_convergence(values, tol=1e-3, n=3) is False
+
+
+# ---------------------------------------------------------------------------
+# TestDataLoader (4 tests — skipped when CSVs are absent)
+# ---------------------------------------------------------------------------
+
+import os as _os
+_DATA_DIR = _os.environ.get(
+    "TMAL_DATA_DIR",
+    _os.path.join(_os.path.dirname(_os.path.dirname(__file__)), "data"),
+)
+_HAS_INTEGRATED = _os.path.exists(
+    _os.path.join(_DATA_DIR, "all_real_data_integrated.csv")
+)
+
+from core.data_loader import load_integrated
+
+
+@pytest.mark.skipif(not _HAS_INTEGRATED, reason="CSV not present in data/")
+class TestDataLoader:
+    def test_load_integrated_returns_madata(self):
+        d = load_integrated()
+        assert hasattr(d, "effect") and len(d.effect) > 0
+
+    def test_load_integrated_filter_domain(self):
+        d = load_integrated(domain="Colorectal Cancer", source="BMC_2022")
+        assert 0 < len(d.effect) < 2900
+
+    def test_load_integrated_bad_domain_raises(self):
+        with pytest.raises(ValueError, match="0 studies"):
+            load_integrated(domain="NONEXISTENT_XYZ")
+
+    def test_load_integrated_has_optional_fields(self):
+        d = load_integrated()
+        assert d.year is not None and d.design is not None and d.group is not None

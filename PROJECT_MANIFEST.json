@@ -13,14 +13,11 @@
     "Chaitin's Constant (Omega) Estimation"
   ],
   "data_sources": [
-    "all_real_data_integrated.csv",
-    "asreview_pairwise70_COMPLETE.csv",
-    "MA4_HKSJ_results_pairwise70.csv"
+    "data/all_real_data_integrated.csv",
+    "data/ma4_results_pairwise70.csv"
   ],
   "key_metrics": {
     "total_trials_analyzed": 2947,
-    "convergent_halting_probability": 0.99938,
-    "algorithmic_complexity": 0.0312,
-    "decidability": "TRUE"
+    "note": "Metrics are dataset-dependent; re-run scripts to regenerate"
   }
 }

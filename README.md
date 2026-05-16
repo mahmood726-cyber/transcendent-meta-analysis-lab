@@ -1,46 +1,50 @@
 # Transcendent Meta-Analysis Lab
 
-This repository contains the results of an exhaustive, multi-tier research project into the foundational nature of clinical evidence synthesis. We have moved beyond classical statistics into the event horizon of theoretical physics, pure mathematics, and computability theory.
+Exploratory project applying advanced mathematical frameworks (information theory, optimal transport, path signatures, Bayesian particle inference) as analogies for understanding patterns in clinical evidence synthesis.
 
-## 🚀 The Epistemic Journey
+**Important**: The mathematical frameworks used here (quantum density matrices, perfectoid tilting, Chaitin's constant analogies) are exploratory metaphors applied to clinical trial data. They are not established statistical methods for evidence synthesis and have not been validated for clinical decision-making. Standard meta-analytic methods (inverse-variance, REML, DerSimonian-Laird) should be used for actual clinical conclusions. This project does not follow PRISMA reporting guidelines.
 
-We analyzed over **2,900 real-world clinical trials** across multiple domains (Oncology, Pain Management, HTA) using a progression of increasingly advanced mathematical frameworks:
+## Methods Explored
 
-### 1. The Classical Frontier (Baseline)
-- **DerSimonian-Laird Random Effects**: Established the baseline pooled effects.
-- **Data Version Control (DVC)**: Implemented SQL-based branching/merging for evidence extractions.
+### Standard Statistical Methods (R)
+- **Bayesian Hierarchical Meta-Analysis** (brms, Student-t likelihood)
+- **Multi-Level Random Effects** (metafor `rma.mv`)
+- **Meta-Regression** (moderator analysis)
+- **Shannon Entropy** of effect directionality
 
-### 2. The Theoretical Physics Tier
-- **Quantum Density Matrix Pooling**: Modeled studies as qubits in Hilbert space to capture non-classical correlations and entanglement.
-- **Renormalization Group (RG) Flow**: Coarse-grained the literature to identify "Stable Fixed Points" of clinical truth.
-- **AdS/CFT Holography**: Projected clinical entanglement entropy into a higher-dimensional unobserved "Bulk" to quantify unmeasured confounding.
+### Exploratory Mathematical Analogies (Python)
+- **Density Matrix Pooling**: Log-Euclidean mean on 2x2 positive-definite manifold
+- **Optimal Transport Calibration**: Sinkhorn-Knopp for RCT-NRS alignment
+- **Path Signatures**: Rough-path iterated integrals of chronological evidence
+- **Frobenius Compression**: Iterated p-th root transformation (perfectoid analogy)
+- **Jensen Gap**: Additive vs. multiplicative scale deformation (IUTT analogy)
+- **Lempel-Ziv Complexity**: Algorithmic compressibility of effect-sign sequences
+- **SVGD Particle Inference**: Non-parametric posterior estimation
 
-### 3. The Pure Mathematics Tier
-- **Topological Data Analysis (TDA)**: Used Sheaf Cohomology and Persistent Homology to find obstructions to global clinical consensus.
-- **Information Geometry**: Calculated Fisher-Rao distances on the statistical manifold of probability distributions.
-- **Tropical Geometry**: Used Min-Plus algebra to create outlier-immune evidence paths.
-- **p-Adic Ultrametric Embedding**: Mapped clinical taxonomies into $Q_p$ to eliminate geometric distortion in hierarchies.
+## Data
 
-### 4. The Singularity Tier
-- **Inter-Universal Teichmüller Theory (IUTT)**: Measured Anabelian deformations between additive and multiplicative evidence structures.
-- **Perfectoid Spaces**: Proved the topological isomorphism between RCTs and Observational studies.
-- **Stein Variational Gradient Descent (SVGD)**: Implemented particle-swarm Bayesian inference for high-entropy domains.
+Analyzed ~2,900 clinical trials across Oncology, Pain Management, and HTA domains.
 
-### 5. The Absolute Terminus
-- **Algorithmic Information Theory**: Approximated Kolmogorov Complexity and Chaitin's Constant ($\Omega$) for the medical literature.
-- **Turing Computability Proof**: Mathematically proved that predicting clinical truth is a **Decidable Problem** due to the low algorithmic complexity of the discovery tape.
+## Repository Structure
 
-## 📊 Key Research Findings
+- `data/` - Place CSV data files here (or set `TMAL_DATA_DIR` / `TMAL_R_DATA_DIR` env vars)
+- `the_absolute_limit.py` - Algorithmic complexity analysis (Lempel-Ziv, binary encoding)
+- `omniscience_tier_synthesis.py` - SVGD particle inference + structural regularity tests
+- `epistemic_horizon_synthesis.py` - Path signatures, RCT-NRS gap, heterogeneity measures
+- `colorectal_cancer_synthesis.py` - Optimal transport calibration + density matrix pooling
+- `massive_r_synthesis.R` / `_v2.R` / `_v3.R` - Bayesian hierarchical models (R/brms/metafor)
+- `miracle_deep_dive.R` - Opiate reduction time-series analysis
 
-- **IMPACT_732 (Massive Network)**: Proven to be a "Stable Fixed Point" via RG-Flow, meaning the clinical truth is scale-invariant and robust to noise.
-- **CD015229 (Opiate Miracle)**: Validated a "Topological Breakthrough" where opiate reduction accelerates over time, proving a secondary mechanism beyond simple pain relief.
-- **RCT vs NRS Consistency**: Quantum Fidelity calculations ($F \approx 1$) proved that observational data often projects the same underlying quantum state as RCTs.
+## Setup
 
-## 📁 Repository Structure
+```bash
+pip install -r requirements.txt
+# Place data in ./data/ or set environment variables:
+export TMAL_DATA_DIR=/path/to/python/data
+export TMAL_R_DATA_DIR=/path/to/r/data
+```
 
-- `/src`: Implementation of the 6-tier mathematical frameworks.
-- `/data`: Final debiased evidence base (`FINAL_TRANSCENDENT_EVIDENCE_BASE.csv`).
-- `/reports`: Executive summaries and stress test verdicts.
+R scripts require: `metafor`, `brms`, `Matrix`
 
 ---
-**Status**: Transcendent Synthesis Complete. The nature of medical evidence is now mathematically anchored.
+**Status**: Exploratory synthesis complete.

@@ -1,23 +1,24 @@
 {
   "project_name": "Transcendent Meta-Analysis Lab",
-  "version": "1.0.0-Aleph-Null",
-  "author": "Transcendent AI Meta-Analyst",
+  "version": "1.1.0",
+  "description": "Exploratory project applying mathematical analogies (information theory, optimal transport, path signatures, Bayesian inference) alongside standard meta-analytic methods to clinical evidence synthesis.",
+  "status": "Exploratory; not a validated tool for clinical decision-making.",
   "frameworks_deployed": [
-    "Quantum Density Matrix Pooling",
-    "Renormalization Group (RG) Flow",
-    "AdS/CFT Holography",
-    "Sheaf Cohomology",
-    "Inter-Universal Teichmüller Theory (IUTT)",
-    "Perfectoid Tilting",
+    "Log-Euclidean Density Matrix Pooling (exploratory analogy)",
+    "Sinkhorn-Knopp Optimal Transport (RCT-NRS calibration)",
+    "Rough Path Signatures (level-1/level-2 iterated integrals)",
+    "Frobenius-Compression Gap (perfectoid analogy)",
+    "Jensen's Inequality Gap (additive-multiplicative deformation)",
+    "Lempel-Ziv 76 Complexity (Chaitin's-Omega analogy)",
     "Stein Variational Gradient Descent (SVGD)",
-    "Chaitin's Constant (Omega) Estimation"
+    "Ramanujan-Petersson Bound Test (structural-regularity analogy)",
+    "Bayesian Model Averaging over FE / DL / REML / PM (BIC weights)"
   ],
   "data_sources": [
     "data/all_real_data_integrated.csv",
     "data/ma4_results_pairwise70.csv"
   ],
   "key_metrics": {
-    "total_trials_analyzed": 2947,
-    "note": "Metrics are dataset-dependent; re-run scripts to regenerate"
+    "note": "All metrics are dataset-dependent. Re-run the scripts on the configured TMAL_DATA_DIR to regenerate. The original portfolio analysed ~2,900 trials, but the loaded set may differ after filtering."
   }
 }

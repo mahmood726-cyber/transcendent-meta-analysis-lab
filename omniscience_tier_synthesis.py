@@ -1,12 +1,18 @@
-import pandas as pd
 import numpy as np
-import scipy.linalg as la
-import os
-import warnings
 
-warnings.filterwarnings("default")
+from core.data_loader import load_integrated_df
 
 np.random.seed(42)
+
+
+def _first_n_primes(n):
+    primes = []
+    candidate = 2
+    while len(primes) < n:
+        if all(candidate % p != 0 for p in primes):
+            primes.append(candidate)
+        candidate += 1
+    return np.array(primes, dtype=float)
 
 
 def stein_variational_gradient_descent(y, v, n_particles=50, iters=100):
@@ -57,15 +63,6 @@ def chow_motive_of_evidence(y):
     hist, _ = np.histogram(y, bins=10)
     a_p = hist - np.mean(hist)
 
-    def _first_n_primes(n):
-        primes = []
-        candidate = 2
-        while len(primes) < n:
-            if all(candidate % p != 0 for p in primes):
-                primes.append(candidate)
-            candidate += 1
-        return np.array(primes, dtype=float)
-
     p_vals = _first_n_primes(len(a_p))
     bounds = 2 * np.sqrt(p_vals)
     violations = np.sum(np.abs(a_p) > bounds)
@@ -78,15 +75,12 @@ def main():
     print("  EXPLORATORY TIER: STEIN VARIATIONAL INFERENCE & STRUCTURAL TESTS")
     print("===================================================================")
 
-    # Load Data
-    DATA_DIR = os.environ.get("TMAL_DATA_DIR", os.path.join(os.path.dirname(__file__), "data"))
-    df = pd.read_csv(os.path.join(DATA_DIR, "all_real_data_integrated.csv"))
-    df['log_or'] = pd.to_numeric(df['log_or'], errors='coerce')
-    df['se'] = pd.to_numeric(df['se'], errors='coerce')
-    df = df.dropna(subset=['log_or', 'se'])
-
     # Analyze Domain 7
-    data = df[(df['source'] == 'IMPACT_HTA') & (df['domain'] == '7')].copy()
+    try:
+        data = load_integrated_df(source="IMPACT_HTA", domain="7")
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Could not load data: {e}")
+        return
     y = data['log_or'].values
     v = data['se'].values**2
 

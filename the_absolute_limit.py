@@ -1,9 +1,6 @@
-import pandas as pd
 import numpy as np
-import os
-import warnings
 
-warnings.filterwarnings("default")
+from core.data_loader import load_integrated_df
 
 
 def chaitins_omega_approximation(y, num_bits=32):
@@ -55,10 +52,11 @@ def main():
     print("===================================================================")
 
     # Load Data
-    DATA_DIR = os.environ.get("TMAL_DATA_DIR", os.path.join(os.path.dirname(__file__), "data"))
-    df = pd.read_csv(os.path.join(DATA_DIR, "all_real_data_integrated.csv"))
-    df['log_or'] = pd.to_numeric(df['log_or'], errors='coerce')
-    df = df.dropna(subset=['log_or'])
+    try:
+        df = load_integrated_df(require_se=False)
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Could not load data: {e}")
+        return
 
     y = df['log_or'].values
 

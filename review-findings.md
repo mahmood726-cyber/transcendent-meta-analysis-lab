@@ -40,7 +40,7 @@
 - **[P1-8]** [FIXED] Removed `sklearn` import and dead `rbf_kernel` call. (`omniscience_tier_synthesis.py`)
 - **[P1-9]** [FIXED] Added `bandwidth = max(bandwidth, 1e-8)` guard. (`omniscience_tier_synthesis.py`)
 - **[P1-10]** [FIXED] All 4 Python files now have `if __name__ == '__main__':` guards. Functions are importable without side effects.
-- **[P1-11]** OPEN: No test files yet. Functions are now importable for testing.
+- **[P1-11]** [FIXED] Added `tests/test_analysis_functions.py` covering `pool_quantum`, `sinkhorn_knopp`, `compute_path_signature`, `perfectoid_tilting`, `anabelian_iutt_deformation`, `_first_n_primes`, `chow_motive_of_evidence`, `stein_variational_gradient_descent`, `chaitins_omega_approximation`, and `turing_degree_of_medicine`. Total suite: 59 passing, 4 skipped (data-dependent).
 - **[P1-12]** [FIXED] Added `if len(topic_data) < 2: return` early exit. (`colorectal_cancer_synthesis.py`)
 - **[P1-13]** [FIXED] Added note: "ICC uses mean sampling variance as approximation." (`massive_r_synthesis.R`)
 - **[P1-14]** [FIXED] Added note: "Pain (SMD) and opiate (mg) are on different scales; cross-domain distance comparisons are illustrative only." (`miracle_deep_dive.R`)
@@ -54,18 +54,32 @@
 - **[P2-3]** OPEN: Fisher-Rao formula is an approximation. Noted as "analogy" in header.
 - **[P2-4]** [FIXED] Spectral analysis no longer uses zero-padding, so `abs(eigenvals)` replaced with `eigenvals[eigenvals > 0]`. (`massive_r_synthesis_v2.R`)
 - **[P2-5]** [FIXED] Removed unused `ggplot2` import from both files. (`massive_r_synthesis.R`, `miracle_deep_dive.R`)
-- **[P2-6]** OPEN: `_first_n_primes` still nested. Low impact (called once with n=10).
+- **[P2-6]** [FIXED] `_first_n_primes` promoted to module level in `omniscience_tier_synthesis.py`; covered by `tests/test_analysis_functions.py::TestFirstNPrimes`.
 - **[P2-7]** [FIXED] brms now uses `min(4, parallel::detectCores() - 1)` for cores. (`massive_r_synthesis.R`)
 - **[P2-8]** [FIXED] Added `seed = 42` to brms call + `set.seed(42)` at top. (`massive_r_synthesis.R`)
-- **[P2-9]** OPEN: Manifest data_sources mismatch. Low priority.
+- **[P2-9]** [FIXED] `PROJECT_MANIFEST.json` rewritten: framework list updated to reflect the renamed analogies (Jensen gap, Ramanujan-Petersson test, etc.), BMA over FE/DL/REML/PM added, hard-coded `total_trials_analyzed` replaced with a note that metrics are dataset-dependent.
 - **[P2-10]** OPEN: LOO is O(N^2). Acceptable for small N.
 - **[P2-11]** [FIXED] Added caveat: "64 bits is too short for reliable randomness classification." (`the_absolute_limit.py`)
-- **[P2-12]** OPEN: Data-loading duplication. Would need shared utils module.
-- **[P2-13]** OPEN: Redundant `warnings.filterwarnings("default")`. Harmless.
+- **[P2-12]** [FIXED] Added `core.data_loader.load_integrated_df()` shared helper. All four Python analysis scripts (`colorectal_cancer_synthesis.py`, `the_absolute_limit.py`, `epistemic_horizon_synthesis.py`, `omniscience_tier_synthesis.py`) now use it instead of duplicating CSV loading, dtype coercion, and filtering.
+- **[P2-13]** [FIXED] Removed redundant `warnings.filterwarnings("default")` (and the now-unused `warnings` imports) from all four analysis scripts.
 
 ---
 
-#### Status: 14/14 P0 FIXED, 13/14 P1 FIXED (P1-11 tests deferred), 7/13 P2 FIXED
+#### Status: 14/14 P0 FIXED, 14/14 P1 FIXED, 11/13 P2 FIXED (P2-3 noted-as-analogy, P2-10 acceptable for small N)
+
+---
+
+#### 2026-05-20 follow-up — repository hygiene
+- Added `core.data_loader.load_integrated_df()` and routed every analysis
+  script through it (P2-12).
+- Promoted `_first_n_primes` to module level (P2-6).
+- Refreshed `PROJECT_MANIFEST.json` to reflect renamed analogies and removed
+  the stale hard-coded trial count (P2-9).
+- Removed redundant `warnings.filterwarnings("default")` (P2-13).
+- Added `tests/test_analysis_functions.py` (24 new tests) covering the pure
+  functions in the four exploratory scripts (P1-11). Suite now: 59 passed,
+  4 skipped (CSV-dependent).
+- Added `.github/workflows/tests.yml` running pytest on Python 3.10 – 3.12.
 
 #### False Positive Watch
 - DOR = exp(mu1 + mu2) — not present in this codebase

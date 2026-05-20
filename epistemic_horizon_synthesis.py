@@ -1,11 +1,7 @@
-import pandas as pd
 import numpy as np
-import scipy.linalg as la
 from scipy.special import logsumexp
-import os
-import warnings
 
-warnings.filterwarnings("default")
+from core.data_loader import load_integrated_df
 
 
 def compute_path_signature(y, order=2):
@@ -117,29 +113,19 @@ def main():
     print("  EXPLORATORY ANALYSIS: PATH SIGNATURES, RCT-NRS GAP & HETEROGENEITY")
     print("===================================================================")
 
-    # Load Data
-    DATA_DIR = os.environ.get("TMAL_DATA_DIR", os.path.join(os.path.dirname(__file__), "data"))
-    df = pd.read_csv(os.path.join(DATA_DIR, "all_real_data_integrated.csv"))
-    df['log_or'] = pd.to_numeric(df['log_or'], errors='coerce')
-    df['se'] = pd.to_numeric(df['se'], errors='coerce')
-    df['year'] = pd.to_numeric(df['year'], errors='coerce')
-    df = df.dropna(subset=['log_or', 'se'])
-
-    breast_cancer = df[(df['source'] == 'BMC_2022') & (df['domain'] == 'Breast Cancer')].copy()
-    impact_domain7 = df[(df['source'] == 'IMPACT_HTA') & (df['domain'] == '7')].copy()
-
-    print(f"Loaded Breast Cancer Cohort: {len(breast_cancer)} trials.")
-    print(f"Loaded IMPACT_HTA Domain 7 Cohort: {len(impact_domain7)} trials.")
-
-    if len(breast_cancer) > 0:
-        analyze_domain("Breast Cancer (BMC_2022)", breast_cancer)
-    else:
-        print("No data found for Breast Cancer.")
-
-    if len(impact_domain7) > 0:
-        analyze_domain("Massive Clinical Network: Domain 7 (IMPACT_HTA)", impact_domain7)
-    else:
-        print("No data found for Domain 7.")
+    cohorts = [
+        ("Breast Cancer (BMC_2022)", {"source": "BMC_2022", "domain": "Breast Cancer"}),
+        ("Massive Clinical Network: Domain 7 (IMPACT_HTA)",
+         {"source": "IMPACT_HTA", "domain": "7"}),
+    ]
+    for label, filt in cohorts:
+        try:
+            cohort = load_integrated_df(**filt)
+        except (FileNotFoundError, ValueError) as e:
+            print(f"No data found for {label}: {e}")
+            continue
+        print(f"Loaded {label} cohort: {len(cohort)} trials.")
+        analyze_domain(label, cohort)
 
     print("\n===================================================================")
     print("  EXPLORATORY ANALYSIS COMPLETE.")
